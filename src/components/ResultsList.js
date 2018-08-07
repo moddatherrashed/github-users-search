@@ -8,4 +8,4 @@ const ResultsList = (props) => {
     )
 }
 
-export default ResultsList
+export { ResultsList }
