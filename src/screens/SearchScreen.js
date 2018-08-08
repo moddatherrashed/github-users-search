@@ -36,7 +36,7 @@ class SearchScreen extends Component {
     }
 
     getInfo = () => {
-        axios.get(`https://api.github.com/search/users?q=${this.state.searchText}&access_token=80022a6183e4bcfb6fbc485f47fa5734bd9009da`)
+        axios.get(`https://api.github.com/search/users?q=${this.state.searchText}&access_token=bd95376fb152e66d1be45a0704cbd892c63aa4be`)
             .then(({ data }) => {
                 this.setState({
                     results: data.items,
