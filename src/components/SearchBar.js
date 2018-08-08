@@ -16,6 +16,7 @@ const SearchBar = (props) => {
                 placeholder="Search for..."
                 underlineColorAndroid='transparent'
                 value={props.value}
+                onSubmitEditing={props.onSubmit}
             />
         </View>
     )
