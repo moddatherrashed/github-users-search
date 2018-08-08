@@ -1,12 +1,19 @@
 import React from 'react'
-import { FlatList, Image, Text, TouchableOpacity, View, StyleSheet } from 'react-native'
+import { FlatList, Image, Text, TouchableOpacity, View, StyleSheet, ActivityIndicator } from 'react-native'
 
 
 const ResultsList = (props) => {
     return (
         <View
             style={styles.listContainer}>
-            {props.results.length < 1 ?
+            {props.isLoading ?
+                <ActivityIndicator size="large" color="white" />
+                :
+                <View>
+                    <Text style={styles.githubUsersText}>GITHUB USERS</Text>
+                </View>}
+            {props.results.length === 0 && props.isLoading === false
+                ?
                 <Text style={styles.notFoundText}>No Result Found For "{props.searchText}"</Text>
                 :
                 <FlatList
@@ -15,8 +22,7 @@ const ResultsList = (props) => {
                     keyExtractor={item => item.id.toString()}
                     renderItem={({ item }) =>
                         <TouchableOpacity
-                            style={styles.listItem}
-                        >
+                            style={styles.listItem}>
                             <Image
                                 source={{ uri: item.avatar_url }}
                                 style={styles.itemImage}
@@ -37,9 +43,18 @@ const styles = StyleSheet.create({
         maxHeight: 300,
         zIndex: 10,
         position: 'absolute',
-        top: 75,
+        top: 70,
         left: 30,
+        elevation: 5,
+        shadowOffset: { height: 0, width: 0 },
+        shadowColor: 'black',
+        shadowOpacity: 0.3,
         right: 30
+    },
+    githubUsersText: {
+        padding: 5,
+        color: 'white',
+        fontWeight: '700'
     },
     flatListContainer: {
         padding: 10,

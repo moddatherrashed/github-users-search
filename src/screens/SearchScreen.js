@@ -2,17 +2,19 @@ import React, { Component } from 'react'
 import { View, Image, Text, StyleSheet, SafeAreaView } from 'react-native'
 import { SearchBar, ResultsList } from '../components'
 import axios from 'axios'
+
 class SearchScreen extends Component {
     state = {
         searchText: '',
-        results: []
+        results: [],
+        isLoading: false
     }
 
     render() {
         return (
             <SafeAreaView style={styles.safeAreaStyle}>
                 <SearchBar
-                    onChangeText={this.handleInputChange}
+                    onChangeText={this.handleSearch}
                     value={this.state.searchText}
                     onSubmit={() => this.setState({ searchText: '' })}
                 />
@@ -37,7 +39,8 @@ class SearchScreen extends Component {
         axios.get(`https://api.github.com/search/users?q=${this.state.searchText}`)
             .then(({ data }) => {
                 this.setState({
-                    results: data.items
+                    results: data.items,
+                    isLoading: false
                 })
             })
             .catch(error => {
@@ -45,21 +48,23 @@ class SearchScreen extends Component {
             })
     }
 
-    handleInputChange = searchText => {
+    handleSearch = searchText => {
         this.setState({
-            searchText
+            searchText,
+            isLoading: true
         }, () => {
-            if (this.state.searchText && this.state.searchText.length > 1) {
+            if (this.state.searchText.length > 1) {
                 this.getInfo()
             }
         })
     }
 
-    renderResultsList = (searchText) => {
-        if (this.state.searchText.length !== 0)
+    renderResultsList = searchText => {
+        if (searchText.length > 1)
             return <ResultsList
                 searchText={this.state.searchText}
-                results={this.state.results} />
+                results={this.state.results}
+                isLoading={this.state.isLoading} />
     }
 }
 
