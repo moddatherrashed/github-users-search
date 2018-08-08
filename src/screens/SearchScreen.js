@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image, Text, StyleSheet } from 'react-native'
+import { View, Image, Text, StyleSheet, SafeAreaView } from 'react-native'
 import { SearchBar, ResultsList } from '../components'
 import axios from 'axios'
 class SearchScreen extends Component {
@@ -10,7 +10,7 @@ class SearchScreen extends Component {
 
     render() {
         return (
-            <View>
+            <SafeAreaView style={styles.safeAreaStyle}>
                 <SearchBar
                     onChangeText={this.handleInputChange}
                     value={this.state.searchText}
@@ -29,7 +29,7 @@ class SearchScreen extends Component {
                     </Text>
                 </View>
                 {this.renderResultsList(this.state.searchText)}
-            </View>
+            </SafeAreaView>
         )
     }
 
@@ -77,6 +77,9 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         margin: 15,
         alignSelf: 'center'
+    },
+    safeAreaStyle: {
+        flex: 1
     }
 })
 

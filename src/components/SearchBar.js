@@ -29,7 +29,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'center',
         padding: 5,
-        elevation: 5
+        elevation: 5,
+        shadowOffset: { height: 0, width: 0 },
+        shadowColor: 'black',
+        shadowOpacity: 0.3,
     },
     searchIconImage: {
         height: 24,
