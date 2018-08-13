@@ -1,12 +1,11 @@
 import React from 'react';
-import { SearchScreen } from './src/screens';
+import { SearchScreen, AccountViewer } from './src/screens';
+import { createStackNavigator } from 'react-navigation'
 
-class App extends React.Component {
-  render() {
-    return (
-      <SearchScreen />
-    )
-  }
-}
 
-export default App
+const AppMainStackNAvigator = createStackNavigator({
+  SearchScreen: { screen: SearchScreen },
+  AccountViewer: { screen: AccountViewer }
+})
+
+export default AppMainStackNAvigator

@@ -3,6 +3,7 @@ import { FlatList, Image, Text, TouchableOpacity, View, StyleSheet, ActivityIndi
 
 
 const ResultsList = (props) => {
+    
     return (
         <View
             style={styles.listContainer}>
@@ -22,6 +23,7 @@ const ResultsList = (props) => {
                     keyExtractor={item => item.id.toString()}
                     renderItem={({ item }) =>
                         <TouchableOpacity
+                            onPress={() => props.navigate('AccountViewer', { url: item.html_url })}
                             style={styles.listItem}>
                             <Image
                                 source={{ uri: item.avatar_url }}

@@ -10,6 +10,10 @@ class SearchScreen extends Component {
         isLoading: false
     }
 
+    static navigationOptions = {
+        header: null
+    }
+
     render() {
         return (
             <SafeAreaView style={styles.safeAreaStyle}>
@@ -36,7 +40,7 @@ class SearchScreen extends Component {
     }
 
     getInfo = () => {
-        axios.get(`https://api.github.com/search/users?q=${this.state.searchText}&access_token=bd95376fb152e66d1be45a0704cbd892c63aa4be`)
+        axios.get(`https://api.github.com/search/users?q=${this.state.searchText}`)
             .then(({ data }) => {
                 this.setState({
                     results: data.items,
@@ -62,6 +66,7 @@ class SearchScreen extends Component {
     renderResultsList = searchText => {
         if (searchText.length > 1)
             return <ResultsList
+                navigate={this.props.navigation.navigate}
                 searchText={this.state.searchText}
                 results={this.state.results}
                 isLoading={this.state.isLoading} />
